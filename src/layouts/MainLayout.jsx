@@ -7,7 +7,6 @@ import BackToTop from '../components/layout/BackToTop'
 
 export default function MainLayout() {
   const { pathname } = useLocation()
-  const isHome = pathname === '/'
 
   useEffect(() => {
     window.scrollTo(0, 0)
@@ -17,7 +16,7 @@ export default function MainLayout() {
     <div className="flex min-h-screen flex-col">
       <RouteLoader />
       <Navbar />
-      <main key={pathname} className={`page-enter flex-1 ${isHome ? '' : ''}`}>
+      <main key={pathname} className="page-enter flex flex-1 flex-col">
         <Outlet />
       </main>
       <Footer />

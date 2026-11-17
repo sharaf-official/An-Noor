@@ -4,11 +4,11 @@
 export const committeeYear = 2025
 
 export const leaders = [
-  { name: "Usama Nu'man", role: 'President', photo: '/images/committee/usama-numan.jpg' },
+  { name: "Usama Nu'man", role: 'President', photo: '/images/leadership/president.png' },
 ]
 
 export const viceLeaders = [
-  { name: 'Abdur Rahman', role: 'Vice President', photo: '/images/committee/abdur-rahman.jpg' },
+  { name: 'Abdur Rahman', role: 'Vice President', photo: '/images/leadership/vice-president .png' },
   { name: 'Ahmedh Zahraf', role: 'Vice President', photo: '/images/committee/ahmedh-zahraf.jpg' },
 ]
 

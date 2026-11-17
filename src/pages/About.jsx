@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Target, Eye, Users, HeartHandshake, BookOpen, Sparkles, MapPin, CalendarDays, Building2 } from 'lucide-react'
 import PageBanner from '../components/ui/PageBanner'
 import SectionTitle from '../components/ui/SectionTitle'
-import PresidentMessage from '../components/home/PresidentMessage'
+import LeadershipMessages from '../components/home/LeadershipMessages'
 import { site } from '../data/site'
 import { aboutPreview } from '../data/home'
 import { story, focusAreas } from '../data/about'
@@ -144,8 +144,7 @@ export default function About() {
       </section>
 
       {/* President's message (same data as Home) */}
-      <PresidentMessage />
-
+      <LeadershipMessages />
       {/* CTA */}
       <section className="bg-brand-cream">
         <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 px-4 py-14 text-center">

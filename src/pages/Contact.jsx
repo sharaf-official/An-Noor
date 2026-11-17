@@ -65,31 +65,32 @@ export default function Contact() {
               <InfoCard Icon={Mail} label="Email" value={site.email} href={isDraft(site.email) ? '' : `mailto:${site.email}`} />
             </div>
 
-            {(site.facebook || site.instagram) && (
-              <p className="mt-5 text-sm text-gray-700">
-                You can also find us on{' '}
-                {[
-                  { label: 'Facebook', href: site.facebook },
-                  { label: 'Instagram', href: site.instagram },
-                ]
-                  .filter((s) => s.href)
-                  .map((s, i, arr) => (
-                    <span key={s.label}>
-                      <a
-                        href={s.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-semibold text-brand-navy underline underline-offset-4 hover:text-brand-gold-dark"
-                      >
-                        {s.label}
-                      </a>
-                      {i < arr.length - 1 ? ' and ' : ''}
-                    </span>
-                  ))}
-                .
-              </p>
-            )}
-          </div>
+  {(site.facebook || site.instagram || site.tiktok) && (
+  <p className="mt-5 text-sm text-gray-700">
+    You can also find us on{' '}
+    {[
+      { label: 'Facebook', href: site.facebook },
+      { label: 'Instagram', href: site.instagram },
+      { label: 'TikTok', href: site.tiktok },
+    ]
+      .filter((s) => s.href)
+      .map((s, i, arr) => (
+        <span key={s.label}>
+          <a
+            href={s.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-brand-navy underline underline-offset-4 hover:text-brand-gold-dark"
+          >
+            {s.label}
+          </a>
+          {i < arr.length - 2 ? ', ' : i === arr.length - 2 ? ' and ' : ''}
+        </span>
+      ))}
+    .
+  </p>
+)}
+        </div>
 
           {/* Form -> WhatsApp */}
           <div>

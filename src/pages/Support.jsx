@@ -6,6 +6,7 @@ import CopyButton from '../components/ui/CopyButton'
 import { bank, bankNote, waysToHelp } from '../data/support'
 import { site } from '../data/site'
 import { isDraft, waLink } from '../utils/helpers'
+import HadithCard from '../components/support/HadithCard'
 
 const icons = [HeartHandshake, Users, Gift, Share2]
 
@@ -50,67 +51,77 @@ export default function Support() {
         </div>
       </section>
 
-      {/* Bank details */}
+      {/* Bank details + Hadith */}
       <section className="bg-white">
-        <div className="mx-auto max-w-2xl px-4 py-14 sm:py-20">
+        <div className="mx-auto max-w-6xl px-4 py-14 sm:py-20">
           <SectionTitle eyebrow="Donate" title="Bank Details" subtitle="You can send your contribution directly to our account." />
 
-          <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand-dark to-brand-navy text-white shadow-xl">
-            <div className="flex items-center gap-3 border-b border-white/10 px-6 py-4">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold text-brand-dark">
-                <Landmark size={20} />
-              </span>
-              <p className="font-display text-lg font-bold">{site.name}</p>
+          <div className="grid items-stretch gap-8 lg:grid-cols-2">
+            {/* Left: Hadith (below bank details on mobile) */}
+            <div className="order-2 lg:order-1">
+              <HadithCard />
             </div>
 
-            <dl className="divide-y divide-white/10 px-6">
-              {rows.map(([label, value]) => {
-                const draft = isDraft(value)
-                return (
-                  <div key={label} className="flex items-center justify-between gap-3 py-4">
-                    <div className="min-w-0">
-                      <dt className="text-xs font-semibold uppercase tracking-wider text-brand-gold">{label}</dt>
-                      <dd
-                        className={`mt-0.5 break-words font-semibold ${
-                          draft ? 'text-sm italic text-white/50' : 'text-lg'
-                        }`}
-                      >
-                        {value}
-                      </dd>
-                    </div>
-                    {label === 'Account Number' && <CopyButton value={value} label="Copy" />}
-                  </div>
-                )
-              })}
-            </dl>
+            {/* Right: Bank details + buttons */}
+            <div className="order-1 lg:order-2">
+              <div className="overflow-hidden rounded-3xl bg-gradient-to-br from-brand-dark to-brand-navy text-white shadow-xl">
+                <div className="flex items-center gap-3 border-b border-white/10 px-6 py-4">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-gold text-brand-dark">
+                    <Landmark size={20} />
+                  </span>
+                  <p className="font-display text-lg font-bold">{site.name}</p>
+                </div>
 
-            <p
-              className={`px-6 py-4 text-sm ${
-                isDraft(bankNote) ? 'italic text-white/50' : 'bg-white/5 text-white/80'
-              }`}
-            >
-              {bankNote}
-            </p>
-          </div>
+                <dl className="divide-y divide-white/10 px-6">
+                  {rows.map(([label, value]) => {
+                    const draft = isDraft(value)
+                    return (
+                      <div key={label} className="flex items-center justify-between gap-3 py-4">
+                        <div className="min-w-0">
+                          <dt className="text-xs font-semibold uppercase tracking-wider text-brand-gold">{label}</dt>
+                          <dd
+                            className={`mt-0.5 break-words font-semibold ${
+                              draft ? 'text-sm italic text-white/50' : 'text-lg'
+                            }`}
+                          >
+                            {value}
+                          </dd>
+                        </div>
+                        {label === 'Account Number' && <CopyButton value={value} label="Copy" />}
+                      </div>
+                    )
+                  })}
+                </dl>
 
-          <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
-            {slipLink ? (
-              <a
-                href={slipLink}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-gold px-6 py-3 font-semibold text-brand-dark shadow transition hover:brightness-95 sm:w-auto"
-              >
-                <MessageCircle size={18} />
-                Send Payment Slip on WhatsApp
-              </a>
-            ) : null}
-            <Link
-              to="/contact"
-              className="inline-flex w-full items-center justify-center rounded-full border-2 border-brand-navy px-6 py-3 font-semibold text-brand-navy transition hover:bg-brand-navy hover:text-brand-gold sm:w-auto"
-            >
-              Contact Us
-            </Link>
+                <p
+                  className={`px-6 py-4 text-sm ${
+                    isDraft(bankNote) ? 'italic text-white/50' : 'bg-white/5 text-white/80'
+                  }`}
+                >
+                  {bankNote}
+                </p>
+              </div>
+
+              <div className="mt-6 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+                {slipLink ? (
+                  <a
+                    href={slipLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-gold px-6 py-3 font-semibold text-brand-dark shadow transition hover:brightness-95 sm:w-auto"
+                  >
+                    <MessageCircle size={18} />
+                    Send Payment Slip on WhatsApp
+                  </a>
+                ) : null}
+                <Link
+                  to="/contact"
+                  className="inline-flex w-full items-center justify-center rounded-full border-2 border-brand-navy px-6 py-3 font-semibold text-brand-navy transition hover:bg-brand-navy hover:text-brand-gold sm:w-auto"
+                >
+                  Contact Us
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
       </section>

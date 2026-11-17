@@ -10,6 +10,7 @@ import Gallery from './pages/Gallery'
 import Support from './pages/Support'
 import Contact from './pages/Contact'
 import NotFound from './pages/NotFound'
+import StudentBoard from './pages/StudentBoard'
 
 export default function App() {
   return (
@@ -22,6 +23,7 @@ export default function App() {
           <Route path="/events" element={<Events />} />
           <Route path="/projects" element={<Projects />} />
           <Route path="/committee" element={<Committee />} />
+          <Route path="/committee/student-board" element={<StudentBoard />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/support" element={<Support />} />
           <Route path="/contact" element={<Contact />} />
