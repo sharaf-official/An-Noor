@@ -8,7 +8,7 @@ export default function SupportCTA() {
         <HeartHandshake className="mx-auto text-brand-gold" size={40} />
         <h2 className="mt-3 font-display text-2xl font-bold sm:text-3xl">Be a Part of Our Journey</h2>
         <p className="mt-2 text-white/85">
-          [PLACEHOLDER: Short invitation to support the association's community work.]
+          Your support helps us guide our students and serve our community. Join us and be a part of the change.
         </p>
         <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <Link
