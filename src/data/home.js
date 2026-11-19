@@ -9,11 +9,11 @@ export const heroImages = [
 
 export const aboutPreview = {
   paragraphs: [
-    'An-Noor Youth Welfare Association is a non-profit organisation based in Hunupitiya, Wattala, Sri Lanka, established in 2022.',
-    'Our An-Noor Association carries out many important programmes for the children in our community. We are also very happy to see the children taking part in these activities with great interest and enthusiasm.',
+    'An-Noor Youth Welfare Association is a non-profit organisation based in Hunupitiya, Wattala, Sri Lanka, established in 2022 by 15 dedicated young individuals.',
+    'We guide and empower young people aged 8 to 18, protect them from negative influences, and help them reach their full potential through education, leadership, spirituality, and sports.',
   ],
-  mission: 'To inspire and empower teenagers through Islamic values, knowledge, and community support-fostering spiritual growth, leadership, and positive action in society.',
-  vision: 'To build a genaration of confident, responsible, and faith-driven youth who lead with compassion,serve their communities, and uphold the principles of Islam in every aspect of life',
+  mission: 'To inspire and empower teenagers through Islamic values, knowledge, and community support, fostering spiritual growth, leadership, and positive action in society.',
+  vision: 'To build a generation of confident, responsible, and faith-driven youth who lead with compassion, serve their communities, and uphold the principles of Islam in every aspect of life.',
 }
 
 export const president = {

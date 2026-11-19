@@ -31,7 +31,7 @@ export const officeBearers = [
 export const heads = [
   { name: 'F.M. Muadh', role: 'Head of Discipline', photo: '/images/student-board/muadh.png' },
   { name: 'M.N.M. Nasik', role: 'Head of Education', photo: '/images/student-board/nasik.png' },
-  { name: 'M.R.M. Fazlan', role: 'Event Organizer', photo: '/images/student-board/fazlan.png' },
+  { name: 'M.R.M. Fazlan', role: 'Head of Events', photo: '/images/student-board/fazlan.png' },
 ]
 
 export const members = [

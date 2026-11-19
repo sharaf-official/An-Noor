@@ -2,11 +2,19 @@ import { useState } from 'react'
 import ActivityCard from './ActivityCard'
 import ActivityModal from './ActivityModal'
 
+// tab = [key, label]                    -> filters by item.status === key (old behaviour)
+// tab = [key, label, field, value]      -> filters by item[field] === value
+function matches(item, tab) {
+  const [key, , field = 'status', value = key] = tab
+  return item[field] === value
+}
+
 export default function ActivityList({ items, tabs, emptyText }) {
   const [tab, setTab] = useState('all')
   const [active, setActive] = useState(null)
 
-  const shown = tab === 'all' ? items : items.filter((i) => i.status === tab)
+  const current = tabs.find((t) => t[0] === tab)
+  const shown = tab === 'all' || !current ? items : items.filter((i) => matches(i, current))
 
   return (
     <>

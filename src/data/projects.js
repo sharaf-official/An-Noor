@@ -16,7 +16,6 @@ export const projects = [
       'The programme focused on developing discipline, leadership qualities and positive behaviour.',
       'Our vision is to nurture a generation that excels in education, leadership and all aspects of life, shaping a strong and responsible society.',
     ],
-    video: '/videos/special-counselling.mp4',
     
     photos: [
       '/images/projects/youth-counselling-1.jpg',
@@ -39,6 +38,7 @@ export const projects = [
       'Our sincere thanks to Ash Sheikh M.T.M Irshad (Sharafy) for leading this valuable session with his guidance and advice.',
     ],
     
+    video: '/videos/special-counselling.mp4',
 
     photos: [
       '/images/projects/special-counselling-1.jpg',
@@ -49,7 +49,7 @@ export const projects = [
 
   {
     id: 'book-distribution-2026',
-    status: 'completeda',
+    status: 'completed',
     category: 'Education',
     title: 'A Gift of Knowledge: Book Distribution',
     date: '19 September 2026',

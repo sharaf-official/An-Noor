@@ -69,6 +69,43 @@ function RoundPhoto({ src, name, className = '', ring = '' }) {
   )
 }
 
+// Leadership card (navy, gold ring)
+function LeaderCard({ name, role, photo, isPresident = false, className = '' }) {
+  return (
+    <div
+      className={`relative flex flex-col items-center overflow-hidden rounded-3xl bg-gradient-to-br from-brand-dark via-brand-navy to-brand-navy p-6 pb-8 text-center text-white shadow-xl ${className}`}
+    >
+      <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-brand-gold/15 blur-3xl" />
+      <div className="absolute -bottom-14 -left-10 h-40 w-40 rounded-full bg-brand-blue/25 blur-3xl" />
+
+      <RoundPhoto
+        src={photo}
+        name={name}
+        className={`relative ${isPresident ? 'h-40 w-40 sm:h-44 sm:w-44' : 'h-32 w-32 sm:h-36 sm:w-36'}`}
+        ring="ring-4 ring-brand-gold ring-offset-4 ring-offset-brand-navy"
+      />
+
+      <span className="relative mt-5 inline-block rounded-full bg-brand-gold px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-dark">
+        {role}
+      </span>
+      <h3
+        className={`relative mt-2 font-display font-bold leading-snug ${
+          isPresident ? 'text-2xl' : 'text-xl'
+        }`}
+      >
+        {name}
+      </h3>
+
+      {isPresident && (
+        <>
+          <div className="relative mt-3 h-1 w-12 rounded-full bg-brand-gold" />
+          <p className="relative mt-3 text-sm text-white/75">Student Board {boardYear}</p>
+        </>
+      )}
+    </div>
+  )
+}
+
 // One card style for the team
 function PersonCard({ name, role, photo }) {
   return (
@@ -112,15 +149,24 @@ function Group({ title, list }) {
 export default function StudentBoard() {
   const [filter, setFilter] = useState('all')
 
+  // Secretary + Treasurer go to the Leadership section
+  const secretary = officeBearers.find((m) => m.role === 'Secretary')
+  const treasurer = officeBearers.find((m) => m.role === 'Treasurer')
+  const topOfficers = [secretary, treasurer].filter(Boolean)
+  const otherBearers = officeBearers.filter((m) => !topOfficers.includes(m))
+
   const memberList = members.map((m) => ({ ...m, role: '' }))
+
+  // Section / filter name for the heads group (change here only)
+  const HEADS_LABEL = 'Organizers'
 
   const FILTERS = [
     {
       key: 'all',
       label: 'All',
-      count: officeBearers.length + heads.length + memberList.length,
+      count: otherBearers.length + heads.length + memberList.length,
       groups: [
-        { title: 'Office Bearers', list: officeBearers },
+        { title: 'Office Bearers', list: otherBearers },
         { title: 'Heads & Organizers', list: heads },
         { title: 'Members', list: memberList },
       ],
@@ -128,8 +174,8 @@ export default function StudentBoard() {
     {
       key: 'office',
       label: 'Office Bearers',
-      count: officeBearers.length,
-      groups: [{ title: 'Office Bearers', list: officeBearers }],
+      count: otherBearers.length,
+      groups: [{ title: 'Office Bearers', list: otherBearers }],
     },
     {
       key: 'heads',
@@ -203,60 +249,28 @@ export default function StudentBoard() {
             </section>
           )}
 
-          {/* Intro + President & Vice Presidents */}
+          {/* Intro + Leadership */}
           <section className="bg-white">
             <div className="mx-auto max-w-4xl px-4 py-14 sm:py-20">
               <p className="mx-auto mb-12 max-w-2xl text-center text-lg text-gray-700">{intro}</p>
 
-              <SectionTitle eyebrow="Leadership" title="President & Vice Presidents" />
+              <SectionTitle eyebrow="Leadership" title="Student Board Leadership" />
 
-              {/* President banner */}
-              <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-brand-dark via-brand-navy to-brand-navy p-7 text-white shadow-xl sm:p-10">
-                <div className="absolute -right-12 -top-12 h-56 w-56 rounded-full bg-brand-gold/15 blur-3xl" />
-                <div className="absolute -bottom-16 -left-10 h-48 w-48 rounded-full bg-brand-blue/25 blur-3xl" />
+              {/* Row 1: VP - President (raised) - VP */}
+              <div className="mx-auto grid max-w-4xl grid-cols-1 items-start gap-6 md:grid-cols-3 md:gap-8">
+                <LeaderCard {...vicePresidents[0]} className="order-2 md:order-none md:mt-16" />
+                <LeaderCard {...president} isPresident className="order-1 md:order-none" />
+                <LeaderCard {...vicePresidents[1]} className="order-3 md:order-none md:mt-16" />
+              </div>
 
-                <div className="relative flex flex-col items-center gap-6 text-center md:flex-row md:gap-10 md:text-left">
-                  <RoundPhoto
-                    src={president.photo}
-                    name={president.name}
-                    className="h-44 w-44 sm:h-52 sm:w-52"
-                    ring="ring-4 ring-brand-gold ring-offset-4 ring-offset-brand-navy"
-                  />
-                  <div>
-                    <span className="inline-block rounded-full bg-brand-gold px-4 py-1 text-xs font-bold uppercase tracking-widest text-brand-dark">
-                      {president.role}
-                    </span>
-                    <h3 className="mt-3 font-display text-3xl font-bold sm:text-4xl">{president.name}</h3>
-                    <div className="mx-auto mt-3 h-1 w-14 rounded-full bg-brand-gold md:mx-0" />
-                    <p className="mt-3 text-white/75">Student Board {boardYear}</p>
-                  </div>
+              {/* Row 2: Secretary + Treasurer */}
+              {topOfficers.length > 0 && (
+                <div className="mx-auto mt-8 grid max-w-2xl grid-cols-1 items-stretch gap-6 sm:grid-cols-2 md:mt-10 md:gap-8">
+                  {topOfficers.map((m) => (
+                    <LeaderCard key={m.name} {...m} className="h-full" />
+                  ))}
                 </div>
-              </div>
-
-              {/* Vice Presidents */}
-              <div className="mt-5 grid gap-5 sm:grid-cols-2">
-                {vicePresidents.map((m) => (
-                  <div
-                    key={m.name}
-                    className="flex items-center gap-4 rounded-2xl border border-brand-gold/50 bg-white p-4 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-gold hover:shadow-lg sm:gap-5 sm:p-5"
-                  >
-                    <RoundPhoto
-                      src={m.photo}
-                      name={m.name}
-                      className="h-24 w-24 sm:h-28 sm:w-28"
-                      ring="ring-2 ring-brand-gold ring-offset-2 ring-offset-white"
-                    />
-                    <div className="min-w-0">
-                      <span className="inline-block rounded-full bg-brand-navy px-3 py-0.5 text-[11px] font-semibold uppercase tracking-wider text-brand-gold">
-                        {m.role}
-                      </span>
-                      <h3 className="mt-2 font-display text-lg font-bold leading-snug text-brand-navy sm:text-xl">
-                        {m.name}
-                      </h3>
-                    </div>
-                  </div>
-                ))}
-              </div>
+              )}
             </div>
           </section>
 
@@ -279,7 +293,7 @@ export default function StudentBoard() {
                 ))}
               </div>
 
-              <div key={filter} className="[animation:pageIn_0.4s_ease_both]">
+              <div key={filter}>
                 {active.groups.map((g) => (
                   <Group key={g.title} title={g.title} list={g.list} />
                 ))}

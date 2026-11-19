@@ -113,7 +113,7 @@ export const events = [
       'Our sincere thanks to all the students who participated and made this event a memorable one.',
       "Together, let's inspire young minds and shape the leaders of tomorrow!",
     ],
-    photos: ['/images/events/childrens-day-1.jpg', '/images/events/childrens-day-2.jpg', '/images/events/childrens-day-3.jpg', '/images/events/childrens-day-4.jpg'],
+    photos: ['/images/events/childrens-day-1.jpg', '/images/events/childrens-day-2.jpg', '/images/events/childrens-day-3.jpg'],
     video: '/videos/childrens-day.mp4',
   },
 ]
