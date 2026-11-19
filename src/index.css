@@ -142,3 +142,24 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .bt-anim { animation: none !important; transition: none !important; }
 }
+@keyframes eventPopIn {
+  from { opacity: 0; transform: translateX(-28px) scale(0.96); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-pop-anim { animation: none !important; }
+}
+
+@keyframes eventModalIn {
+  from { opacity: 0; transform: translateY(24px) scale(0.94); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes eventFade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .event-pop-anim { animation: none !important; }
+}

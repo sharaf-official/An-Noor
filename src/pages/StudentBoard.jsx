@@ -167,7 +167,7 @@ export default function StudentBoard() {
       count: otherBearers.length + heads.length + memberList.length,
       groups: [
         { title: 'Office Bearers', list: otherBearers },
-        { title: 'Heads & Organizers', list: heads },
+        { title: 'Organizers', list: heads },
         { title: 'Members', list: memberList },
       ],
     },
@@ -179,7 +179,7 @@ export default function StudentBoard() {
     },
     {
       key: 'heads',
-      label: 'Heads & Organizers',
+      label: 'Organizers',
       count: heads.length,
       groups: [{ title: 'Heads & Organizers', list: heads }],
     },
