@@ -1,139 +1,122 @@
 # An-Noor Youth Welfare Association Website
 
-The official website of the An-Noor Youth Welfare Association (Hunupitiya, Sri Lanka, since 2022). The site introduces the association, its leadership and student board, and showcases its events, projects and gallery. It also gives visitors a way to support the association and get in touch.
+Official website of **An-Noor Youth Welfare Association**, a non-profit youth organisation based in Hunupitiya, Wattala, Sri Lanka (since 2022).
 
-## Pages and Sections
+**Live site:** https://an-noor-mu.vercel.app
 
-- **Home** - Introduction to the association, highlights and messages from the leadership.
-- **About** - Who we are, our mission and focus areas, and messages from the leadership team.
-- **Events** - Upcoming and past events with photo galleries and details.
-- **Projects** - Community service projects (ongoing and completed) with photos, videos and details.
-- **Committee**
-  - **Executive Committee** - Office bearers and committee members.
-  - **Student Board** - Mentors, President and Vice Presidents, and the student board team with filters.
-- **Gallery** - Photo gallery of the association's activities.
-- **Support Us** - Donation and bank details for those who wish to contribute.
-- **Contact** - Contact details and enquiry information.
+<!-- [PLACEHOLDER: add a screenshot here]
+![Home page](./docs/home.png)
+-->
+
+## Pages
+
+- **Home**: hero, about preview, leadership messages, support call-to-action
+- **About**
+- **Events**
+- **Projects**: filter by status and category
+- **Committee**: Executive Committee (`/committee`)
+- **Student Board**: `/committee/student-board`
+- **Gallery**
+- **Support Us**: bank details
+- **Contact**
 
 ## Tech Stack
 
-- React
-- Vite
-- React Router
-- Tailwind CSS
-- Lucide React (icons)
-- Deployed on Vercel
+- [React](https://react.dev/) + [Vite](https://vite.dev/)
+- [Tailwind CSS v4](https://tailwindcss.com/) (design tokens in `src/index.css`)
+- [react-router-dom](https://reactrouter.com/)
+- [framer-motion](https://www.framer.com/motion/)
+- [lucide-react](https://lucide.dev/)
+- [react-helmet-async](https://github.com/staylor/react-helmet-async)
 
-## Folder Structure
+## Getting Started
 
-```
-.
-├── public/
-│   ├── images/          Photos and logos (events, projects, committee, etc.)
-│   └── videos/          Video files used in projects or events
-├── src/
-│   ├── components/
-│   │   ├── ui/          Shared UI (PageBanner, SectionTitle, ActivityList, ActivityModal)
-│   │   ├── committee/   Committee components (CommitteeTabs, etc.)
-│   │   └── home/        Home and About sections (LeadershipMessages, etc.)
-│   ├── pages/           One file per page (Home, About, Events, Projects, StudentBoard, ...)
-│   ├── data/            Editable content (leadership, student board, events, projects)
-│   ├── App.jsx          Routes
-│   └── main.jsx         App entry point
-├── index.html
-├── package.json
-└── vite.config.js
-```
-
-## Running Locally
-
-Requirements: Node.js 18 or later and npm.
+**Requirements:** Node.js 18+ and npm
 
 ```bash
-# 1. Install dependencies
+# clone
+git clone https://github.com/sharaf-official/An-Noor.git
+cd An-Noor
+
+# install
 npm install
 
-# 2. Start the development server
+# run locally
 npm run dev
 ```
 
-The site will be available at `http://localhost:5173`.
+Open http://localhost:5173
 
-## Building and Deploying
-
-Create a production build:
+### Build for production
 
 ```bash
 npm run build
-```
-
-The output is generated in the `dist/` folder. To preview the build locally:
-
-```bash
 npm run preview
 ```
 
-### Deploying to Vercel
+## Project Structure
 
-1. Push the project to a GitHub repository.
-2. In Vercel, choose "Add New Project" and import the repository.
-3. Use these settings (Vercel normally detects them automatically):
-   - Framework preset: Vite
-   - Build command: `npm run build`
-   - Output directory: `dist`
-4. Click Deploy. Every push to the main branch will redeploy the site automatically.
+```
+public/
+  images/            # leadership, student-board, projects, gallery photos
+src/
+  components/
+    layout/          # navbar, footer, page loader
+    home/            # home page sections
+    ui/              # shared UI (PageBanner, SectionTitle, ActivityList, ...)
+    forms/
+    committee/       # CommitteeTabs, MemberCard
+  data/              # all site content (edit here, no code changes needed)
+    committee.js
+    studentBoard.js
+    leadership.js
+    projects.js
+    events.js
+  pages/             # one file per route
+  index.css          # Tailwind + theme tokens
+```
 
 ## Updating Content
 
-Most content is stored in the `src/data/` folder, so pages do not need to be edited for routine updates. File names may differ slightly in your project; search the `src/data/` folder for the matching file.
+Most content lives in `src/data/`:
 
-| What to update | File |
+| What to change | File |
 | --- | --- |
-| Leadership messages (Chief Advisor, President, General Secretary, Vice President) | `src/data/leadership.js` |
-| Student Board (mentors, president, vice presidents, office bearers, heads, members) | `src/data/studentBoard.js` |
+| Executive Committee, members, year | `src/data/committee.js` |
+| Student Board, mentors | `src/data/studentBoard.js` |
+| Home leadership messages | `src/data/leadership.js` |
+| Projects (status, category, photos) | `src/data/projects.js` |
 | Events | `src/data/events.js` |
-| Projects | `src/data/projects.js` |
 
-### Student Board
+**Projects:** `status` must be `'ongoing'` or `'completed'`. Filter tabs are defined in `src/pages/Projects.jsx`; a tab can also filter by `category`.
 
-In `src/data/studentBoard.js`, set `BOARD_READY` to `true` once the members are ready to be shown. While it is `false`, the page displays a "Coming Soon" message. Update `boardYear` and `intro` for each new term.
+**Photos:** put files in `public/images/...`. Use **lowercase file names with no spaces** (hosting is case-sensitive). Compress large photos (under about 1 MB) before adding them.
 
-### Events and Projects
+## Theme
 
-Each entry is an object with fields such as `title`, `category`, `date`, `location`, `summary` and `description`. Projects also use `status` (`'ongoing'` or `'completed'`). Example:
+| Token | Colour |
+| --- | --- |
+| `brand-navy` | `#0d1650` |
+| `brand-dark` | `#080e33` |
+| `brand-blue` | `#2f6db5` |
+| `brand-gold` | `#d9a441` |
+| `brand-gold-dark` | `#a97a1f` |
+| `brand-cream` | `#fdf8ec` |
+| `brand-soft` | `#eaf1fb` |
 
-```js
-{
-  id: 'book-distribution-2026',
-  status: 'completed',
-  category: 'Education',
-  title: 'A Gift of Knowledge: Book Distribution',
-  date: '19 September 2026',
-  summary: 'New textbooks distributed to our students.',
-  description: [
-    'First paragraph.',
-    'Second paragraph.',
-  ],
-  photos: [
-    '/images/projects/book-distribution-1.jpg',
-    '/images/projects/book-distribution-2.jpg',
-  ],
-  video: 'https://www.youtube.com/watch?v=XXXXXXXXXXX',
-}
-```
+Fonts: Playfair Display (headings), Poppins (body), Lora (quotes).
 
-- The first photo is used as the card cover.
-- Add more photos to the `photos` array to enable the gallery (arrows, swipe and thumbnails).
-- `video` accepts a YouTube link or a path to a file in `public/videos/` (for example `'/videos/youth-counselling.mp4'`). Use `videos: [...]` for more than one.
-- Text such as `[PLACEHOLDER: date]` is hidden in the popup until it is replaced with real content.
+## Deployment
 
-### Images and Videos
+Deployed on Vercel. Every push to `main` triggers a new deployment.
 
-- Place images in `public/images/` (for example `public/images/projects/`, `public/images/events/`).
-- Place videos in `public/videos/`. For large videos (over about 20 MB), an unlisted YouTube link is recommended.
-- Reference files from the data files starting with a slash, for example `/images/projects/photo-1.jpg`. Do not include `public` in the path.
-- Use lightweight images (compressed JPG or WebP) to keep the site fast.
+## Contact
 
-## License
+- Email: annooryouthwelfareassociation@gmail.com
+- Address: No: 754, Al Badriya Jumma Masjid, Welegoda, Wattala, Sri Lanka
 
-All content, logos and photos belong to the An-Noor Youth Welfare Association. Do not reuse them without permission.
+## Credits
+
+Designed and developed by **Sharaf Izam** ([@sharaf-official](https://github.com/sharaf-official)).
+
+&copy; An-Noor Youth Welfare Association. All rights reserved.
