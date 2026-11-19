@@ -20,15 +20,21 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with An-Noor YWA on WhatsApp"
-      className="group fixed bottom-24 right-4 z-40 flex items-center gap-2 sm:right-6"
+      className="wa-anim group fixed bottom-20 right-3 z-40 flex items-center gap-2 [animation:waIn_0.6s_cubic-bezier(0.34,1.56,0.64,1)_1s_both] sm:bottom-24 sm:right-5"
     >
       <span className="pointer-events-none hidden rounded-full bg-white px-3 py-1.5 text-sm font-semibold text-brand-navy opacity-0 shadow-lg ring-1 ring-brand-gold/40 transition group-hover:opacity-100 sm:block">
         {whatsapp.label}
       </span>
-      <span className="relative flex h-14 w-14 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition group-hover:scale-110">
-        <span aria-hidden className="absolute inset-0 animate-ping rounded-full bg-[#25D366] opacity-30" />
-        <span className="relative">
-          <WhatsAppIcon />
+
+      <span className="wa-anim relative block [animation:waFloat_3s_ease-in-out_1.6s_infinite]">
+        <span
+          aria-hidden
+          className="wa-anim absolute inset-0 rounded-full border-2 border-[#25D366] [animation:waRipple_2.2s_ease-out_infinite]"
+        />
+        <span className="relative flex h-12 w-12 items-center justify-center rounded-full bg-[#25D366] text-white shadow-lg transition duration-300 group-hover:scale-110">
+          <span className="block group-hover:[animation:waWiggle_0.6s_ease-in-out]">
+            <WhatsAppIcon />
+          </span>
         </span>
       </span>
     </a>

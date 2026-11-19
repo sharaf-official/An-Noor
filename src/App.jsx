@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import MainLayout from './layouts/MainLayout'
 import Preloader from './components/layout/Preloader'
+import WhatsAppButton from './components/ui/WhatsAppButton'
 import Home from './pages/Home'
 import About from './pages/About'
 import Events from './pages/Events'
@@ -16,6 +17,7 @@ export default function App() {
   return (
     <>
       <Preloader />
+      <WhatsAppButton />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Home />} />
