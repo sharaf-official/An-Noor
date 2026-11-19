@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { Link } from 'react-router-dom'
 import { CalendarDays, MapPin, X, ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
 import { events } from '../../data/events'
@@ -86,9 +87,9 @@ export default function UpcomingEventPopup() {
   const showCover = cover && !failed[event.id]
   const hasLocation = event.location && !event.location.startsWith('[')
 
-  return (
+  return createPortal(
     <div
-      className="event-pop-anim fixed inset-0 z-[60] flex items-center justify-center bg-black/65 p-4 [animation:eventFade_0.3s_ease_both]"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-black/65 p-4"
       onClick={close}
     >
       <aside
@@ -96,7 +97,7 @@ export default function UpcomingEventPopup() {
         aria-modal="true"
         aria-label="Upcoming events"
         onClick={(e) => e.stopPropagation()}
-        className="event-pop-anim relative flex max-h-[92vh] w-full max-w-md flex-col overflow-hidden rounded-3xl border-2 border-brand-gold/70 bg-brand-navy text-white shadow-2xl [animation:eventModalIn_0.5s_cubic-bezier(0.34,1.56,0.64,1)_both]"
+        className="relative flex max-h-[92vh] w-full max-w-md flex-col overflow-hidden rounded-3xl border-2 border-brand-gold/70 bg-brand-navy text-white shadow-2xl"
       >
         <button
           type="button"
@@ -147,7 +148,7 @@ export default function UpcomingEventPopup() {
           </div>
 
           {/* Details */}
-          <div key={event.id} className="p-5 [animation:eventFade_0.35s_ease_both]">
+          <div key={event.id} className="p-5">
             <div className="flex items-center justify-between gap-3">
               <span className="inline-block rounded-full bg-brand-gold px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-brand-dark">
                 Upcoming Event
@@ -204,6 +205,7 @@ export default function UpcomingEventPopup() {
           </div>
         </div>
       </aside>
-    </div>
+    </div>,
+    document.body,
   )
 }
