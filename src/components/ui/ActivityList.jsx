@@ -2,40 +2,57 @@ import { useState } from 'react'
 import ActivityCard from './ActivityCard'
 import ActivityModal from './ActivityModal'
 
-// tab = [key, label]                    -> filters by item.status === key (old behaviour)
-// tab = [key, label, field, value]      -> filters by item[field] === value
-function matches(item, tab) {
-  const [key, , field = 'status', value = key] = tab
-  return item[field] === value
+function Chip({ active, onClick, children, small }) {
+  return (
+    <button
+      type="button"
+      role="tab"
+      aria-selected={active}
+      onClick={onClick}
+      className={`rounded-full font-semibold transition ${
+        small ? 'px-4 py-1.5 text-xs sm:text-sm' : 'px-5 py-2 text-sm'
+      } ${
+        active
+          ? 'bg-brand-navy text-brand-gold shadow'
+          : 'border border-brand-gold/50 bg-white text-brand-navy hover:bg-brand-soft'
+      }`}
+    >
+      {children}
+    </button>
+  )
 }
 
-export default function ActivityList({ items, tabs, emptyText }) {
+export default function ActivityList({ items, tabs, categories, emptyText }) {
   const [tab, setTab] = useState('all')
+  const [category, setCategory] = useState('all')
   const [active, setActive] = useState(null)
 
-  const current = tabs.find((t) => t[0] === tab)
-  const shown = tab === 'all' || !current ? items : items.filter((i) => matches(i, current))
+  const shown = items
+    .filter((i) => tab === 'all' || i.status === tab)
+    .filter((i) => category === 'all' || i.category === category)
 
   return (
     <>
-      <div className="mb-8 flex flex-wrap justify-center gap-2" role="tablist">
+      <div className="mb-4 flex flex-wrap justify-center gap-2" role="tablist">
         {tabs.map(([key, label]) => (
-          <button
-            key={key}
-            type="button"
-            role="tab"
-            aria-selected={tab === key}
-            onClick={() => setTab(key)}
-            className={`rounded-full px-5 py-2 text-sm font-semibold transition ${
-              tab === key
-                ? 'bg-brand-navy text-brand-gold shadow'
-                : 'border border-brand-gold/50 bg-white text-brand-navy hover:bg-brand-soft'
-            }`}
-          >
+          <Chip key={key} active={tab === key} onClick={() => setTab(key)}>
             {label}
-          </button>
+          </Chip>
         ))}
       </div>
+
+      {categories && categories.length > 0 && (
+        <div className="mb-8 flex flex-wrap justify-center gap-2" role="tablist" aria-label="Categories">
+          <Chip small active={category === 'all'} onClick={() => setCategory('all')}>
+            All Categories
+          </Chip>
+          {categories.map((c) => (
+            <Chip small key={c} active={category === c} onClick={() => setCategory(c)}>
+              {c}
+            </Chip>
+          ))}
+        </div>
+      )}
 
       {shown.length > 0 ? (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

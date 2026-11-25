@@ -6,11 +6,9 @@ const tabs = [
   ['all', 'All'],
   ['ongoing', 'Ongoing'],
   ['completed', 'Completed'],
-  ['education', 'Education', 'category', 'Education'],
-  ['mentorship', 'Mentorship Program', 'category', 'Mentorship'],
-  ['sports', 'Sports', 'category', 'Sports'],
-  ['leadership', 'Leadership Program', 'category', 'Leadership'],
 ]
+
+const categories = ['Youth Development', 'Education', 'Leadership Program', 'Sports']
 
 export default function Projects() {
   return (
@@ -21,6 +19,7 @@ export default function Projects() {
           <ActivityList
             items={projects}
             tabs={tabs}
+            categories={categories}
             emptyText="No projects in this category right now."
           />
         </div>

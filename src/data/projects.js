@@ -68,7 +68,7 @@ export const projects = [
   {
     id: 'student-discussion-session',
     status: 'completed',
-    category: 'Leadership',
+    category: 'Leadership Program',
     title: 'Empowering Young Minds: Student Discussion Session',
     date: '[PLACEHOLDER: date]',
     location: '[PLACEHOLDER: venue]',

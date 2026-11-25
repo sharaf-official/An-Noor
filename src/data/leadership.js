@@ -21,7 +21,7 @@ export const leaders = [
   },
   {
     role: 'General Secretary',
-    name: 'Zaid',
+    name: 'M.I.M. Zaid',
     photo: '/images/leadership/general-secretary.png',
     message: [
       'Annoor Youth Welfare Association is committed to shaping a brighter future by empowering young minds and nurturing leadership. Our vision is to build a respected institution and a legacy that will inspire generations to come.',

@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import WhatsAppButton from '../components/ui/WhatsAppButton'
 import {
   Target,
   Eye,
@@ -35,6 +34,14 @@ import logo from '../assets/logos/annoor-logo.png'
 // Put your photo here: public\images\about\story.jpg
 const STORY_PHOTO = '/images/about/story.jpg'
 
+// Focus area photos: public\images\focus\
+const focusAreas = [
+  { Icon: BookOpen, title: 'Education', image: '/images/focus/education.jpg' },
+  { Icon: Users, title: 'Leadership', image: '/images/focus/leadership.jpg' },
+  { Icon: ShieldCheck, title: 'Discipline', image: '/images/focus/discipline.jpg' },
+  { Icon: Trophy, title: 'Sports', image: '/images/focus/sports.jpg' },
+]
+
 // Keeps "An-Noor" on one line (no break after the hyphen)
 function NoBreak({ text }) {
   return text.split(/(An-Noor)/g).map((part, i) =>
@@ -45,6 +52,37 @@ function NoBreak({ text }) {
     ) : (
       part
     ),
+  )
+}
+
+function FocusCard({ Icon, title, image, index }) {
+  const [failed, setFailed] = useState(false)
+
+  return (
+    <div className="group relative overflow-hidden rounded-3xl border border-brand-gold/40 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1.5 hover:shadow-xl sm:p-8">
+      <span aria-hidden className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-brand-gold-dark via-brand-gold to-brand-gold-dark" />
+      <span className="absolute right-4 top-4 font-display text-2xl font-bold text-brand-gold/30">
+        {String(index + 1).padStart(2, '0')}
+      </span>
+
+      <div className="mx-auto h-28 w-28 overflow-hidden rounded-full border-4 border-brand-gold bg-brand-navy shadow-md ring-4 ring-brand-gold/20 transition group-hover:scale-105 sm:h-36 sm:w-36">
+        {!failed ? (
+          <img
+            src={image}
+            alt={title}
+            loading="lazy"
+            onError={() => setFailed(true)}
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center text-brand-gold">
+            <Icon size={40} />
+          </div>
+        )}
+      </div>
+
+      <h3 className="mt-5 font-display text-lg font-bold text-brand-navy sm:text-2xl">{title}</h3>
+    </div>
   )
 }
 
@@ -113,7 +151,6 @@ export default function About() {
       <section className="hidden bg-brand-navy lg:block">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:py-20">
           <div className="grid gap-10 lg:grid-cols-12 lg:gap-14">
-            {/* Left: title + opening quote */}
             <div className="lg:col-span-5">
               <div className="lg:sticky lg:top-24">
                 <p className="text-xs font-semibold uppercase tracking-[0.3em] text-brand-gold">Our Story</p>
@@ -128,13 +165,12 @@ export default function About() {
                 <p className="mt-3 font-quote text-xl italic leading-relaxed text-blue-100 sm:text-2xl">
                   <NoBreak text={storyOpening} />
                 </p>
-                <div className="mt-8 pr-3 pb-3">
+                <div className="mt-8 pb-3 pr-3">
                   <StoryPhoto />
                 </div>
               </div>
             </div>
 
-            {/* Right: numbered story cards */}
             <div className="space-y-5 lg:col-span-7">
               {storyParagraphs.map((p, i) => (
                 <article
@@ -152,24 +188,17 @@ export default function About() {
             </div>
           </div>
 
-          {/* Stats */}
           <div className="mt-14 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5">
             {storyStats.map((s) => (
-              <div
-                key={s.label}
-                className="rounded-2xl border border-brand-gold/40 bg-brand-dark/60 p-5 text-center"
-              >
+              <div key={s.label} className="rounded-2xl border border-brand-gold/40 bg-brand-dark/60 p-5 text-center">
                 <p className="font-display text-4xl font-bold text-gold-grad">{s.value}</p>
                 <p className="mt-2 text-xs font-medium leading-snug text-blue-100">{s.label}</p>
               </div>
             ))}
           </div>
 
-          {/* Closing */}
           <div className="mt-10 rounded-3xl bg-gradient-to-r from-brand-gold-dark via-brand-gold to-brand-gold-dark p-6 text-center shadow-xl sm:p-10">
-            <p className="font-display text-xl font-bold leading-snug text-brand-dark sm:text-3xl">
-              {storyClosing}
-            </p>
+            <p className="font-display text-xl font-bold leading-snug text-brand-dark sm:text-3xl">{storyClosing}</p>
             <p className="mx-auto mt-3 max-w-3xl leading-relaxed text-brand-dark/85">
               <NoBreak text={storyClosingText} />
             </p>
@@ -187,7 +216,6 @@ export default function About() {
             <div className="mx-auto mt-3 h-1 w-14 rounded-full bg-brand-gold" />
           </div>
 
-          {/* Opening quote */}
           <div className="mt-6 rounded-2xl bg-brand-navy p-5 text-center shadow-lg">
             <Quote className="mx-auto text-brand-gold" size={24} />
             <p className="mt-2 font-quote text-lg italic leading-relaxed text-white">
@@ -195,12 +223,10 @@ export default function About() {
             </p>
           </div>
 
-          {/* Photo */}
           <div className="mt-6 pb-3 pr-3">
             <StoryPhoto />
           </div>
 
-          {/* Stats: swipe sideways */}
           <div className="-mx-4 mt-6 flex snap-x gap-3 overflow-x-auto px-4 pb-2">
             {storyStats.map((s) => (
               <div
@@ -213,7 +239,6 @@ export default function About() {
             ))}
           </div>
 
-          {/* Story cards */}
           <div className="mt-6 space-y-4">
             {storyParagraphs.map((p, i) => {
               const steps = [
@@ -239,7 +264,6 @@ export default function About() {
             })}
           </div>
 
-          {/* Closing */}
           <div className="mt-6 rounded-2xl bg-gradient-to-r from-brand-gold-dark via-brand-gold to-brand-gold-dark p-5 text-center shadow-lg">
             <p className="font-display text-lg font-bold leading-snug text-brand-dark">{storyClosing}</p>
             <p className="mt-2 text-sm leading-relaxed text-brand-dark/85">
@@ -278,30 +302,13 @@ export default function About() {
         </div>
       </section>
 
-      {/* Focus Areas */}
+      {/* Focus Areas (photo inside the circle) */}
       <section className="bg-brand-cream">
         <div className="mx-auto max-w-6xl px-4 py-14 sm:py-20">
           <SectionTitle eyebrow="What We Do" title="Our Focus Areas" />
           <div className="grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
-            {[
-              { Icon: BookOpen, title: 'Education' },
-              { Icon: Users, title: 'Leadership' },
-              { Icon: ShieldCheck, title: 'Discipline' },
-              { Icon: Trophy, title: 'Sports' },
-            ].map(({ Icon, title }, i) => (
-              <div
-                key={title}
-                className="group relative overflow-hidden rounded-3xl border border-brand-gold/40 bg-white p-6 text-center shadow-sm transition hover:-translate-y-1.5 hover:shadow-xl sm:p-8"
-              >
-                <span aria-hidden className="absolute inset-x-0 top-0 h-1.5 bg-gradient-to-r from-brand-gold-dark via-brand-gold to-brand-gold-dark" />
-                <span className="absolute right-4 top-4 font-display text-2xl font-bold text-brand-gold/30">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
-                <span className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-brand-navy text-brand-gold ring-4 ring-brand-gold/20 transition group-hover:scale-110 sm:h-20 sm:w-20">
-                  <Icon size={30} />
-                </span>
-                <h3 className="mt-5 font-display text-lg font-bold text-brand-navy sm:text-2xl">{title}</h3>
-              </div>
+            {focusAreas.map((f, i) => (
+              <FocusCard key={f.title} {...f} index={i} />
             ))}
           </div>
         </div>
